@@ -11,7 +11,7 @@ class Button2Parser extends DeviceParser {
         var parserInfo = {
             'Button2_StatelessProgrammableSwitch': Button2StatelessProgrammableSwitchParser,
         }
-        this.platform.log(this.platform);
+        this.platform.log.debug(this.platform);
         if (!this.platform.ConfigUtil.getDisableVirtualButtons()) {
             parserInfo['Button2_Switch_VirtualSinglePress'] = Button2SwitchVirtualSinglePressParser;
             parserInfo['Button2_Switch_VirtualDoublePress'] = Button2SwitchVirtualDoublePressParser;
