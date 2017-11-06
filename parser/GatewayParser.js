@@ -7,11 +7,14 @@ class GatewayParser extends DeviceParser {
     }
     
     getAccessoriesParserInfo() {
-        return {
+        var parserInfo = {
             'Gateway_Lightbulb': GatewayLightbulbParser,
-            'Gateway_LightSensor': GatewayLightSensorParser,
-            'Gateway_Switch_JoinPermission': GatewaySwitchJoinPermissionParser
+            'Gateway_LightSensor': GatewayLightSensorParser
+        };
+        if (!this.platform.ConfigUttil.getDisableVirtualJoinPermissionButton()) {
+            parserInfo['Gateway_Switch_JoinPermission'] = GatewaySwitchJoinPermissionParser;
         }
+        return parserInfo
     }
 }
 module.exports = GatewayParser;
