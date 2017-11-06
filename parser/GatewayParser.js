@@ -11,7 +11,7 @@ class GatewayParser extends DeviceParser {
             'Gateway_Lightbulb': GatewayLightbulbParser,
             'Gateway_LightSensor': GatewayLightSensorParser
         };
-        if (!this.platform.ConfigUttil.getDisableVirtualJoinPermissionButton()) {
+        if (!this.platform.ConfigUtil.getDisableVirtualJoinPermissionButton()) {
             parserInfo['Gateway_Switch_JoinPermission'] = GatewaySwitchJoinPermissionParser;
         }
         return parserInfo
