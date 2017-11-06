@@ -8,12 +8,16 @@ class ButtonParser extends DeviceParser {
     }
     
     getAccessoriesParserInfo() {
-        return {
+        var parserInfo = {
             'Button_StatelessProgrammableSwitch': ButtonStatelessProgrammableSwitchParser,
-            'Button_Switch_VirtualSinglePress': ButtonSwitchVirtualSinglePressParser,
-            'Button_Switch_VirtualDoublePress': ButtonSwitchVirtualDoublePressParser
-            // 'Button_Switch_VirtualLongPress': ButtonSwitchVirtualLongPressParser
         }
+        this.platform.log(this.platform);
+        if (!this.platform.ConfigUtil.getDisableVirtualButtons()) {
+            parserInfo['Button_Switch_VirtualSinglePress'] = ButtonSwitchVirtualSinglePressParser;
+            parserInfo['Button_Switch_VirtualDoublePress'] = ButtonSwitchVirtualDoublePressParser;
+            //parserInfo['Button_Switch_VirtualLongPress'] = ButtonSwitchVirtualLongPressParser;
+        }
+        return parserInfo
     }
 }
 module.exports = ButtonParser;
