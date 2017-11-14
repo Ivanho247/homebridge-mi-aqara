@@ -8,12 +8,14 @@ class SingleButton86Parser extends DeviceParser {
     }
     
     getAccessoriesParserInfo() {
-        return {
+        var parserInfo = {
             'SingleButton86_StatelessProgrammableSwitch': SingleButton86StatelessProgrammableSwitchParser,
-            'SingleButton86_Switch_VirtualSinglePress': SingleButton86SwitchVirtualSinglePressParser
-            // 'SingleButton86_Switch_VirtualDoublePress': SingleButton86SwitchVirtualDoublePressParser
-            // 'SingleButton86_Switch_VirtualLongPress': SingleButton86SwitchVirtualLongPressParser
         }
+        this.platform.log.debug(this.platform);
+        if (!this.platform.ConfigUtil.getDisableVirtualButtons()) {
+            parserInfo['SingleButton86_Switch_VirtualSinglePress'] = SingleButton86SwitchVirtualSinglePressParser;
+        }
+        return parserInfo
     }
 }
 module.exports = SingleButton86Parser;
@@ -105,15 +107,3 @@ class SingleButton86SwitchVirtualSinglePressParser extends SingleButton86SwitchV
         this.platform.ParseUtil.parserAccessories(newObj);
     }
 }
-
-// class SingleButton86SwitchVirtualDoublePressParser extends SingleButton86SwitchVirtualBasePressParser {
-    // getWriteCommand(deviceSid, value) {
-        // return '{"cmd":"write","model":"86sw1","sid":"' + deviceSid + '","data":"{\\"channel_0\\":\\"double_click\\", \\"key\\": \\"${key}\\"}"}';
-    // }
-// }
-
-// class SingleButton86SwitchVirtualLongPressParser extends SingleButton86SwitchVirtualBasePressParser {
-    // getWriteCommand(deviceSid, value) {
-        // return '{"cmd":"write","model":"86sw1","sid":"' + deviceSid + '","data":"{\\"channel_0\\":\\"long_click_press\\", \\"key\\": \\"${key}\\"}"}';
-    // }
-// }

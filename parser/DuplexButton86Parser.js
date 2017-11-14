@@ -8,18 +8,19 @@ class DuplexButton86Parser extends DeviceParser {
     }
     
     getAccessoriesParserInfo() {
-        return {
+        var parserInfo = {
             'DuplexButton86_StatelessProgrammableSwitch_Left': DuplexButton86StatelessProgrammableSwitchLeftParser,
-            'DuplexButton86_Switch_VirtualSinglePress_Left': DuplexButton86SwitchVirtualSinglePressLeftParser,
-         // 'DuplexButton86_Switch_VirtualDoublePress_Left': DuplexButton86SwitchVirtualDoublePressLeftParser,
-         // 'DuplexButton86_Switch_VirtualLongPress_Left': DuplexButton86SwitchVirtualLongPressLeftParser,
             'DuplexButton86_StatelessProgrammableSwitch_Right': DuplexButton86StatelessProgrammableSwitchRightParser,
-            'DuplexButton86_Switch_VirtualSinglePress_Right': DuplexButton86SwitchVirtualSinglePressRightParser,
-         // 'DuplexButton86_Switch_VirtualDoublePress_Right': DuplexButton86SwitchVirtualDoublePressRightParser,
-         // 'DuplexButton86_Switch_VirtualLongPress_Right': DuplexButton86SwitchVirtualLongPressRightParser,
             'DuplexButton86_StatelessProgrammableSwitch_Both': DuplexButton86StatelessProgrammableSwitchBothParser,
-            'DuplexButton86_Switch_VirtualSinglePress_Both': DuplexButton86SwitchVirtualSinglePressBothPressParser
+            
         }
+        this.platform.log.debug(this.platform);
+        if (!this.platform.ConfigUtil.getDisableVirtualButtons()) {
+            parserInfo['DuplexButton86_Switch_VirtualSinglePress_Left'] = DuplexButton86SwitchVirtualSinglePressLeftParser;
+            parserInfo['DuplexButton86_Switch_VirtualSinglePress_Right'] = DuplexButton86SwitchVirtualSinglePressRightParser;
+            parserInfo['DuplexButton86_Switch_VirtualSinglePress_Both'] = DuplexButton86SwitchVirtualSinglePressBothPressParser;
+        }
+        return parserInfo
     }
 }
 module.exports = DuplexButton86Parser;
@@ -141,18 +142,6 @@ class DuplexButton86SwitchVirtualSinglePressLeftParser extends DuplexButton86Swi
     }
 }
 
-// class DuplexButton86SwitchVirtualDoublePressLeftParser extends DuplexButton86SwitchVirtualBasePressParser {
-    // getWriteCommand(deviceSid, value) {
-        // return '{"cmd":"write","model":"86sw2","sid":"' + deviceSid + '","data":"{\\"channel_0\\":\\"double_click\\", \\"key\\": \\"${key}\\"}"}';
-    // }
-// }
-
-// class DuplexButton86SwitchVirtualLongPressLeftParser extends DuplexButton86SwitchVirtualBasePressParser {
-    // getWriteCommand(deviceSid, value) {
-        // return '{"cmd":"write","model":"86sw2","sid":"' + deviceSid + '","data":"{\\"channel_0\\":\\"long_click_press\\", \\"key\\": \\"${key}\\"}"}';
-    // }
-// }
-
 class DuplexButton86SwitchVirtualSinglePressRightParser extends DuplexButton86SwitchVirtualBasePressParser {
     getWriteCommand(deviceSid, value) {
         return '{"cmd":"write","model":"86sw2","sid":"' + deviceSid + '","data":"{\\"channel_1\\":\\"click\\", \\"key\\": \\"${key}\\"}"}';
@@ -164,18 +153,6 @@ class DuplexButton86SwitchVirtualSinglePressRightParser extends DuplexButton86Sw
         this.platform.ParseUtil.parserAccessories(newObj);
     }
 }
-
-// class DuplexButton86SwitchVirtualDoublePressRightParser extends DuplexButton86SwitchVirtualBasePressParser {
-    // getWriteCommand(deviceSid, value) {
-        // return '{"cmd":"write","model":"86sw2","sid":"' + deviceSid + '","data":"{\\"channel_1\\":\\"double_click\\", \\"key\\": \\"${key}\\"}"}';
-    // }
-// }
-
-// class DuplexButton86SwitchVirtualLongPressRightParser extends DuplexButton86SwitchVirtualBasePressParser {
-    // getWriteCommand(deviceSid, value) {
-        // return '{"cmd":"write","model":"86sw2","sid":"' + deviceSid + '","data":"{\\"channel_1\\":\\"long_click_press\\", \\"key\\": \\"${key}\\"}"}';
-    // }
-// }
 
 class DuplexButton86SwitchVirtualSinglePressBothPressParser extends DuplexButton86SwitchVirtualBasePressParser {
     getWriteCommand(deviceSid, value) {
