@@ -42,7 +42,10 @@ class SingleButton86StatelessProgrammableSwitchParser extends AccessoryParser {
         var result = [];
         
         var service = new that.Service.StatelessProgrammableSwitch(accessoryName);
-        service.getCharacteristic(that.Characteristic.ProgrammableSwitchEvent);
+        var characteristic = service.getCharacteristic(that.Characteristic.ProgrammableSwitchEvent);
+        characteristic.setProps({
+            maxValue: 0,
+        });
         result.push(service);
         
         var batteryService  = new that.Service.BatteryService(accessoryName);
