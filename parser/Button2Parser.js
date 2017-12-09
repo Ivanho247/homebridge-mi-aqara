@@ -44,7 +44,10 @@ class Button2StatelessProgrammableSwitchParser extends AccessoryParser {
         var result = [];
         
         var service = new that.Service.StatelessProgrammableSwitch(accessoryName);
-        service.getCharacteristic(that.Characteristic.ProgrammableSwitchEvent);
+        var switchEventCharacteristic = service.getCharacteristic(that.Characteristic.ProgrammableSwitchEvent);
+        switchEventCharacteristic.setProps({
+            maxValue: 1,
+        });
         result.push(service);
         
         var batteryService  = new that.Service.BatteryService(accessoryName);
