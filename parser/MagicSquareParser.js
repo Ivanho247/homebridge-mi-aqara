@@ -50,7 +50,7 @@ class MagicSquareStatelessProgrammableSwitchBaseParser extends AccessoryParser {
         var that = this;
         var result = [];
 
-        platform.log.info("Getting services for Magic Square");
+        that.platform.log.info("Getting services for Magic Square");
         
         var service = new that.Service.StatelessProgrammableSwitch(accessoryName);
         var switchEventCharacteristic = service.getCharacteristic(that.Characteristic.ProgrammableSwitchEvent);
