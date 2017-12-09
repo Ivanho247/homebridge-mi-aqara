@@ -8,19 +8,23 @@ class MagicSquareParser extends DeviceParser {
     }
     
     getAccessoriesParserInfo() {
-        return {
+        var parserInfo = {
             'MagicSquare_StatelessProgrammableSwitch_Flip90': MagicSquareStatelessProgrammableSwitchFlip90Parser,
             'MagicSquare_StatelessProgrammableSwitch_Flip180': MagicSquareStatelessProgrammableSwitchFlip180Parser,
             'MagicSquare_StatelessProgrammableSwitch_Move': MagicSquareStatelessProgrammableSwitchMoveParser,
             'MagicSquare_StatelessProgrammableSwitch_TapTwice': MagicSquareStatelessProgrammableSwitchTapTwiceParser,
             'MagicSquare_StatelessProgrammableSwitch_ShakeAir': MagicSquareStatelessProgrammableSwitchShakeAirParser,
-            'MagicSquare_StatelessProgrammableSwitch_Rotate': MagicSquareStatelessProgrammableSwitchRotateParser,
-            'MagicSquare_Switch_VirtualFlip90': MagicSquareSwitchVirtualFlip90Parser,
-            'MagicSquare_Switch_VirtualFlip180': MagicSquareSwitchVirtualFlip180Parser,
-            'MagicSquare_Switch_VirtualMove': MagicSquareSwitchVirtualMoveParser,
-            'MagicSquare_Switch_VirtualTapTwice': MagicSquareSwitchVirtualTapTwiceParser,
-            'MagicSquare_Switch_VirtualShakeAir': MagicSquareSwitchVirtualShakeAirParser
+            'MagicSquare_StatelessProgrammableSwitch_Rotate': MagicSquareStatelessProgrammableSwitchRotateParser
         }
+        this.platform.log.debug(this.platform);
+        if (!this.platform.ConfigUtil.getDisableVirtualButtons()) {
+            parserInfo['MagicSquare_Switch_VirtualFlip90'] = MagicSquareSwitchVirtualFlip90Parser;
+            parserInfo['MagicSquare_Switch_VirtualFlip180'] = MagicSquareSwitchVirtualFlip180Parser;
+            parserInfo['MagicSquare_Switch_VirtualMove'] = MagicSquareSwitchVirtualMoveParser;
+            parserInfo['MagicSquare_Switch_VirtualTapTwice'] = MagicSquareSwitchVirtualTapTwiceParser;
+            parserInfo['MagicSquare_Switch_VirtualShakeAir'] = MagicSquareSwitchVirtualShakeAirParser;
+        }
+        return parserInfo
     }
 }
 module.exports = MagicSquareParser;
