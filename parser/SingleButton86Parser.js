@@ -42,8 +42,8 @@ class SingleButton86StatelessProgrammableSwitchParser extends AccessoryParser {
         var result = [];
         
         var service = new that.Service.StatelessProgrammableSwitch(accessoryName);
-        var characteristic = service.getCharacteristic(that.Characteristic.ProgrammableSwitchEvent);
-        characteristic.setProps({
+        var switchEventCharacteristic = service.getCharacteristic(that.Characteristic.ProgrammableSwitchEvent);
+        switchEventCharacteristic.setProps({
             maxValue: 0,
         });
         result.push(service);

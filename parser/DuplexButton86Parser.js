@@ -47,7 +47,10 @@ class DuplexButton86StatelessProgrammableSwitchBaseParser extends AccessoryParse
         var result = [];
         
         var service = new that.Service.StatelessProgrammableSwitch(accessoryName);
-        service.getCharacteristic(that.Characteristic.ProgrammableSwitchEvent);
+        var switchEventCharacteristic = service.getCharacteristic(that.Characteristic.ProgrammableSwitchEvent);
+        switchEventCharacteristic.setProps({
+            maxValue: 0,
+        });
         result.push(service);
         
         var batteryService  = new that.Service.BatteryService(accessoryName);
